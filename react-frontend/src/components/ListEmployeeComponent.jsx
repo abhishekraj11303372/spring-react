@@ -8,7 +8,7 @@ export default class ListEmployeeComponent extends Component {
         this.state = {
             employees: []
         }
-        // this.addEmployee = this.addEmployee.bind(this);
+        this.addEmployee = this.addEmployee.bind(this);
     }
 
     componentDidMount() {

@@ -8,7 +8,7 @@ import CreateEmployeeComponent from './components/CreateEmployeeComponent';
 function App() {
   return (
     <div>
-      <Router>
+      <Router forceRefresh={true}>
         <HeaderComponent />
            <div className='container'>
            <Switch>
