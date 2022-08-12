@@ -22,7 +22,7 @@ export default class CreateEmployeeComponent extends Component {
 
     componentDidMount() {
 
-        if(this.state.id == -1) {
+        if(this.state.id === -1) {
             return 
         } else {
             EmployeeService.getEmployeeById(this.state.id).then((res) =>{
@@ -47,7 +47,7 @@ export default class CreateEmployeeComponent extends Component {
         this.setState({emailId: event.target.value});
     }
     
-    saveEmployee = (event) => {
+    saveOrUpdateEmployee = (event) => {
         event.preventDefault();
         let employee = {
             firstName: this.state.firstName,
@@ -57,7 +57,7 @@ export default class CreateEmployeeComponent extends Component {
 
         console.log('employee => ' + JSON.stringify(employee));
         
-        if(this.state.id == -1) {
+        if(this.state.id === -1) {
             EmployeeService.createEmployees(employee).then(res => {this.props.history.push('/employees');});
         } else {
             EmployeeService.updateEmployeeById(employee,this.state.id).then(res => {this.props.history.push('/employees');});
@@ -71,7 +71,7 @@ export default class CreateEmployeeComponent extends Component {
 
     
     getTitle() {
-        if(this.state.id == -1) {
+        if(this.state.id === -1) {
             return <h3 className='text-center'>Add Employee</h3>;
         } else {
             return <h3 className='text-center'>Update Employee</h3>;
@@ -100,7 +100,7 @@ export default class CreateEmployeeComponent extends Component {
                             <input placeholder='Email' name='emailId' value={this.state.emailId} onChange={this.changeEmailIdHandler} className='form-control'/>
                         </div>
 
-                        <button className='btn btn-success my-2' onClick={this.saveEmployee}>Save</button>
+                        <button className='btn btn-success my-2' onClick={this.saveOrUpdateEmployee}>Save</button>
                         <button className='btn btn-danger mx-2 my-2' onClick={this.cancelEmployee}>Cancel</button>
                     </form>
                 </div>
