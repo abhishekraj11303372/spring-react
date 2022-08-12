@@ -17,12 +17,12 @@ export default class CreateEmployeeComponent extends Component {
         this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
         this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
         this.changeEmailIdHandler = this.changeEmailIdHandler.bind(this);
-        this.saveEmployee = this.saveEmployee.bind(this);
+        this.saveOrUpdateEmployee = this.saveOrUpdateEmployee.bind(this);
     }
 
     componentDidMount() {
 
-        if(this.state.id === -1) {
+        if(this.state.id === '_add') {
             return 
         } else {
             EmployeeService.getEmployeeById(this.state.id).then((res) =>{
@@ -57,7 +57,7 @@ export default class CreateEmployeeComponent extends Component {
 
         console.log('employee => ' + JSON.stringify(employee));
         
-        if(this.state.id === -1) {
+        if(this.state.id === '_add') {
             EmployeeService.createEmployees(employee).then(res => {this.props.history.push('/employees');});
         } else {
             EmployeeService.updateEmployeeById(employee,this.state.id).then(res => {this.props.history.push('/employees');});
@@ -71,7 +71,7 @@ export default class CreateEmployeeComponent extends Component {
 
     
     getTitle() {
-        if(this.state.id === -1) {
+        if(this.state.id ===  '_add') {
             return <h3 className='text-center'>Add Employee</h3>;
         } else {
             return <h3 className='text-center'>Update Employee</h3>;

@@ -23,7 +23,7 @@ export default class ListEmployeeComponent extends Component {
     }
 
     addEmployee = (event) => {
-        this.props.history.push("/add-employee/-1");
+        this.props.history.push("/add-employee/_add");
     }
 
   render() {
