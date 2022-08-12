@@ -15,6 +15,10 @@ class EmployeeService {
     getEmployeeById(employeeId) {
         return axios.get(EMPLOYEE_API_BASE_URL + '/', employeeId);
     }
+    
+    updateEmployeeById(employee, employeeId) {
+        return axios.put(EMPLOYEE_API_BASE_URL + '/' + employeeId , employee);
+    }
 }
 
 export default new EmployeeService();

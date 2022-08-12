@@ -48,7 +48,8 @@ import EmployeeService from '../services/EmployeeService.js';
             };
     
             console.log('employee => ' + JSON.stringify(employee));
-            
+
+            EmployeeService.updateEmployeeById(employee,this.state.id).then(res => {this.props.history.push('/employees');});
             
         }
     

@@ -43,7 +43,7 @@ export default class CreateEmployeeComponent extends Component {
         
         
 
-        EmployeeService.createEmployees(employee).then(res => {this.props.history.push('/employee');});
+        EmployeeService.createEmployees(employee).then(res => {this.props.history.push('/employees');});
         
     }
 
