@@ -8,6 +8,7 @@ export default class CreateEmployeeComponent extends Component {
         super(props)
 
         this.state = {
+            id: this.props.match.params.id,
             firstName: '',
             lastName: '',
             emailId: ''
@@ -17,6 +18,21 @@ export default class CreateEmployeeComponent extends Component {
         this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
         this.changeEmailIdHandler = this.changeEmailIdHandler.bind(this);
         this.saveEmployee = this.saveEmployee.bind(this);
+    }
+
+    componentDidMount() {
+
+        if(this.state.id == -1) {
+            return 
+        } else {
+            EmployeeService.getEmployeeById(this.state.id).then((res) =>{
+                let employee = res.data;
+                this.setState({firstName: employee.firstName,
+                lastName: employee.lastName,
+                emailId: employee.emailId})
+            });
+        }
+        
     }
 
     changeFirstNameHandler = (event) => {
@@ -41,9 +57,11 @@ export default class CreateEmployeeComponent extends Component {
 
         console.log('employee => ' + JSON.stringify(employee));
         
-        
-
-        EmployeeService.createEmployees(employee).then(res => {this.props.history.push('/employees');});
+        if(this.state.id == -1) {
+            EmployeeService.createEmployees(employee).then(res => {this.props.history.push('/employees');});
+        } else {
+            EmployeeService.updateEmployeeById(employee,this.state.id).then(res => {this.props.history.push('/employees');});
+        }
         
     }
 
@@ -51,12 +69,22 @@ export default class CreateEmployeeComponent extends Component {
        this.props.history.push("/employees");
     }
 
+    
+    getTitle() {
+        if(this.state.id == -1) {
+            return <h3 className='text-center'>Add Employee</h3>;
+        } else {
+            return <h3 className='text-center'>Update Employee</h3>;
+        }
+    }
+
   render() {
     return (
       <div>
         <div className='row'>
             <div className='card col-md-6 offset-md-3'>
-                <h3 className='text-center'>Add Employee</h3>
+                {/* <h3 className='text-center'>Add Employee</h3> */}
+                {this.getTitle()}
                 <div className='card-body'>
                     <form>
                         <div className='form-group'>
