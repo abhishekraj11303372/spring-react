@@ -52,3 +52,8 @@
   text-align: center;
   color: white;
 }
+
+.formGroup {
+  display: flex;
+  gap: 5px;
+}
